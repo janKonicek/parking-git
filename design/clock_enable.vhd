@@ -39,7 +39,7 @@ architecture behavioral of clock_enable is
     constant bits_needed : integer := integer(ceil(log2(real(PERIOD + 1))));
 
     --! Local counter with needed number of bits
-    signal sig_count : std_logic_vector(bits_needed - 1 downto 0);
+    signal sig_count : std_logic_vector(bits_needed - 1 downto 0) := (others => '0');
 begin
 
     --! Generate clock enable signal. By default, enable signal
