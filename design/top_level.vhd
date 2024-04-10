@@ -2,7 +2,7 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 21.03.2024 10:32:57
+-- Create Date: 10.04.2024 22:03:27
 -- Design Name: 
 -- Module Name: top_level - Behavioral
 -- Project Name: 
@@ -34,80 +34,85 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity top_level is
     Port ( 
            CLK100MHZ : in STD_LOGIC;
-           BTNC : in STD_LOGIC;
-           BTNR : in STD_LOGIC;
-           LED16_B : out std_logic;
-           LED : out std_logic_vector (3 downto 0)
-    );
+           TRIG : out STD_LOGIC_VECTOR (1 downto 0);
+           ECHO : in STD_LOGIC_VECTOR (1 downto 0);
+           CA : out STD_LOGIC;
+           CB : out STD_LOGIC;
+           CC : out STD_LOGIC;
+           CD : out STD_LOGIC;
+           CE : out STD_LOGIC;
+           CF : out STD_LOGIC;
+           CG : out STD_LOGIC;
+           DP : out STD_LOGIC;
+           AN : out STD_LOGIC_VECTOR (7 downto 0);
+           LED_L: out std_logic_vector (7 downto 0);
+           LED_R: out std_logic_vector (7 downto 0));
 end top_level;
 
 architecture Behavioral of top_level is
-    -- Component declaration for clock enable
-    component clock_enable is
-        generic (
-            PERIOD : integer := 200000
-        );
-        Port ( clk : in STD_LOGIC;
-               rst : in STD_LOGIC;
-               pulse : out STD_LOGIC);
-    end component clock_enable;
 
-    -- Component declaration for simple counter
-    component simple_counter is
-        generic (
-           N : integer := 4
-        );
+    component distance
+        port (
+            CLK100MHZ : in std_logic;
+            ECHO1     : in std_logic;
+            dist      : out std_logic_vector (8 downto 0):= (others => '0'));
+    end component;
+
+    component display
+        port (
+            CLK100MHZ : in std_logic;
+            dist      : in std_logic_vector (8 downto 0);
+            CA        : out std_logic;
+            CB        : out std_logic;
+            CC        : out std_logic;
+            CD        : out std_logic;
+            CE        : out std_logic;
+            CF        : out std_logic;
+            CG        : out std_logic;
+            DP        : out std_logic;
+            AN        : out std_logic_vector (7 downto 0)
+            );
+    end component;
     
-        Port ( clk : in STD_LOGIC;
-               rst : in STD_LOGIC;
-               en : in STD_LOGIC;
-               count : out STD_LOGIC_VECTOR (N-1 downto 0));
-    end component simple_counter;
+    -- internal distance signals
+    signal dist1, dist2 : std_logic_vector (8 downto 0);
     
-    -- component
-   component debounce is
-        Port (clk     : in std_logic;
-              rst     : in std_logic;
-              en      : in std_logic;
-              bouncey : in std_logic;
-              clean   : out std_logic;
-              pos_edge : out std_logic;
-              neg_edge : out std_logic);
-    end component debounce;
-    
-    -- Signals
-    signal sig_en_2ms : std_logic;
-    signal sig_event : std_logic;
-    signal sig_open : std_logic;
 begin
 
-    -- Component instantiation of clock enable for 250 ms
-    CLK_EN : clock_enable
-    Port map (
-        clk => CLK100MHz,
-        rst => BTNC,
-        pulse => sig_en_2ms
+    -- distance trigger 1
+    
+    -- distance trigger 2
+
+    -- distance sensor 1
+    DISTANCE1 : distance
+    Port map(   CLK100MHZ => CLK100MHZ,
+                ECHO1 => ECHO(0),
+                dist => dist1
     );
 
-    -- Component instantiation of 4-bit simple counter
-    COUNTER : simple_counter
-    Port map (
-        clk => CLK100MHz,
-        rst => BTNC,
-        en => sig_event,
-        count => LED
+    -- distance sensor 2
+    DISTANCE2 : distance
+    Port map(   CLK100MHZ => CLK100MHZ,
+                ECHO1 => ECHO(1),
+                dist => dist2
     );
-    
-    DEBOUNCE_M : debounce
-    Port map (
-        clk => CLK100MHz,
-        rst => BTNC,
-        bouncey => sig_event,
-        en => sig_en_2ms,
-        pos_edge => sig_event,
-        neg_edge => sig_open,
-        clean => LED16_B
+
+    -- display
+    DISPLAY_OUTPUT : display
+    Port map(   CLK100MHZ => CLK100MHZ,
+                dist => dist1,
+                CA => CA,
+                CB => CB,
+                CC => CC,
+                CD => CD,
+                CE => CE,
+                CF => CF,
+                CG => CG,
+                DP => DP,
+                AN => AN
     );
+
+    -- LEDs
 
 
 end Behavioral;
