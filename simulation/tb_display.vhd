@@ -14,7 +14,6 @@ architecture tb of tb_display is
     component display
         port (CLK100MHZ : in std_logic;
               dist      : in std_logic_vector (8 downto 0);
-              output    : out std_logic_vector (3 downto 0);
               CA        : out std_logic;
               CB        : out std_logic;
               CC        : out std_logic;
@@ -29,7 +28,6 @@ architecture tb of tb_display is
 
     signal sig_CLK100MHZ : std_logic;
     signal sig_dist      : std_logic_vector (8 downto 0);
-    signal sig_output    : std_logic_vector (3 downto 0);
     signal sig_CA        : std_logic;
     signal sig_CB        : std_logic;
     signal sig_CC        : std_logic;
@@ -49,7 +47,6 @@ begin
     dut : display
     port map (CLK100MHZ => sig_CLK100MHZ,
               dist      => sig_dist,
-              output    => sig_output,
               CA        => sig_CA,
               CB        => sig_CB,
               CC        => sig_CC,
