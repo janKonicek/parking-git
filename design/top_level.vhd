@@ -22,14 +22,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity top_level is
     Port ( 
@@ -58,6 +50,15 @@ architecture Behavioral of top_level is
             dist      : out std_logic_vector (8 downto 0):= (others => '0'));
     end component;
 
+    
+    component sensor
+        port ( 
+            clk    : in std_logic; 
+            trig   : out std_logic
+            );
+    end component;
+
+
     component display
         port (
             clk       : in std_logic;
@@ -81,8 +82,16 @@ architecture Behavioral of top_level is
 begin
 
     -- distance trigger 1
-    
+    TRIGGER1 : sensor
+    Port map(   clk => CLK100MHZ,
+                trig => TRIG(0)      
+            );
+            
     -- distance trigger 2
+    TRIGGER2 : sensor
+    Port map(   clk => CLK100MHZ,
+                trig => TRIG(1)      
+            );
 
     -- distance sensor 1
     DISTANCE1 : distance
