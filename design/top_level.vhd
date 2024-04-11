@@ -76,6 +76,15 @@ architecture Behavioral of top_level is
             );
     end component;
     
+    
+    component led
+    
+   port ( 
+            dist : in STD_LOGIC_VECTOR (8 downto 0):= (others => '0');
+            LED_A : out STD_LOGIC_VECTOR (7 downto 0):= (others => '0')
+            );
+    end component;
+
     -- internal distance signals
     signal dist1, dist2 : std_logic_vector (8 downto 0);
     
@@ -124,6 +133,15 @@ begin
     );
 
     -- LEDs
+    LED_LEFT : led
+    Port map(   dist => dist1,
+                LED_A => LED_L
+    );
+
+    LED_RIGHT : led
+    Port map(   dist => dist2,
+                LED_A => LED_R
+    );
 
 
 end Behavioral;
