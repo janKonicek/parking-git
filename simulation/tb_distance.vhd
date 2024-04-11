@@ -11,13 +11,13 @@ end tb_distance;
 architecture tb of tb_distance is
 
     component distance
-        port (CLK100MHZ : in std_logic;
-              ECHO1     : in std_logic;
+        port (clk : in std_logic;
+              echo     : in std_logic;
               dist      : out std_logic_vector (8 downto 0):= (others => '0'));
     end component;
 
-    signal CLK100MHZ : std_logic;
-    signal ECHO1     : std_logic;
+    signal clk : std_logic;
+    signal echo      : std_logic;
     signal dist      : std_logic_vector (8 downto 0):= (others => '0');
 
     constant TbPeriod : time := 10 ns; -- EDIT Put right period here
@@ -27,39 +27,39 @@ architecture tb of tb_distance is
 begin
 
     dut : distance
-    port map (CLK100MHZ => CLK100MHZ,
-              ECHO1     => ECHO1,
+    port map (clk => clk,
+              echo     => echo,
               dist      => dist);
 
     -- Clock generation
     TbClock <= not TbClock after TbPeriod/2 when TbSimEnded /= '1' else '0';
 
     -- EDIT: Check that CLK100MHZ is really your main clock signal
-    CLK100MHZ <= TbClock;
+    clk <= TbClock;
 
     stimuli : process
     begin
         -- EDIT Adapt initialization as needed
        
         -- for k in 0 to 20 loop
-        --    ECHO1 <= '0';        
+        --    echo <= '0';        
         --    wait for 200 us;
-        --    ECHO1 <= '1';
+        --    echo <= '1';
         --    wait for 200 us;
         -- end loop;
-        -- ECHO1 <= '0';
+        -- echo <= '0';
                
-        ECHO1 <= '1';
+        echo <= '1';
         wait for 600 us;
-        ECHO1 <= '0';
+        echo <= '0';
         wait for 100 us;
-        ECHO1 <= '1';
+        echo <= '1';
         wait for 400 us;
-        ECHO1 <= '0';
+        echo <= '0';
         wait for 100 us;
-        ECHO1 <= '1';
+        echo <= '1';
         wait for 8600 us;
-        ECHO1 <= '0';
+        echo <= '0';
         
         -- Stop the cl 
         -- Stop the clock and hence terminate the simulation

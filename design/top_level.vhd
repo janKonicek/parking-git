@@ -53,8 +53,8 @@ architecture Behavioral of top_level is
 
     component distance
         port (
-            CLK100MHZ : in std_logic;
-            ECHO1     : in std_logic;
+            clk       : in std_logic;
+            echo      : in std_logic;
             dist      : out std_logic_vector (8 downto 0):= (others => '0'));
     end component;
 
@@ -86,15 +86,15 @@ begin
 
     -- distance sensor 1
     DISTANCE1 : distance
-    Port map(   CLK100MHZ => CLK100MHZ,
-                ECHO1 => ECHO(0),
+    Port map(   clk => clk,
+                echo => ECHO(0),
                 dist => dist1
     );
 
     -- distance sensor 2
     DISTANCE2 : distance
-    Port map(   CLK100MHZ => CLK100MHZ,
-                ECHO1 => ECHO(1),
+    Port map(   clk => clk,
+                echo => ECHO(1),
                 dist => dist2
     );
 

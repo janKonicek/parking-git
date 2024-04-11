@@ -34,13 +34,13 @@ use IEEE.std_logic_unsigned.all;
 
 entity distance is
 
-    Port ( CLK100MHZ : in STD_LOGIC;
-           ECHO1 : in STD_LOGIC;
+    Port ( clk  : in STD_LOGIC;
+           echo : in STD_LOGIC;
            dist : out STD_LOGIC_VECTOR (8 downto 0):= (others => '0'));
            
     signal sig_count : std_logic_vector (8 downto 0) := (others => '0'); 
-    signal neg_edge : std_logic;
-    signal ECHO1_delayed : std_logic;
+    signal neg_edge  : std_logic;
+    signal echo_delayed : std_logic;
        
 end distance;
 
@@ -57,38 +57,38 @@ architecture Behavioral of distance is
     
 begin
 
-    clk: component clock_enable
+    clock: component clock_enable
     generic map(    PERIOD => 5880)
-    port map(   clk => CLK100MHZ,
+    port map(   clk => clk,
                 rst => '0',
                 pulse => clk_en);
     
     -- delayed signal to determinatate falling edge
-    delay: process (CLK100MHZ)
+    delay: process (clk)
     begin  
-        if rising_edge (CLK100MHZ) then
-            ECHO1_delayed <= ECHO1;        
+        if rising_edge (clk) then
+            echo_delayed <= echo;        
         end if;    
     end process;   
     
     -- falling edge
-    neg_edge <= '1' when (ECHO1 = '0' and ECHO1_delayed = '1') else '0';  
+    neg_edge <= '1' when (echo = '0' and echo_delayed = '1') else '0';  
            
     -- counter in cm
     count: process (clk_en) is
     begin
        if rising_edge(clk_en) then
-          if echo1='1' then
+          if echo='1' then
              sig_count <= sig_count + 1;
           -- counter reset   
-          elsif echo1='0' then
+          elsif echo='0' then
              sig_count <= (others => '0');
           end if;
        end if;
     end process;
 
     -- update dist after new distance is measured
-    process (CLK100MHZ) 
+    process (clk) 
     begin 
         if neg_edge = '1' then
             dist <= sig_count;
