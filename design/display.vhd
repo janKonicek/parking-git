@@ -116,88 +116,76 @@ begin
                 seg(0) => CG
     );
 
-    show_digit : process (sig_en_25ms) is
+    show_digit : process (clk) is
     begin
     
-        if (rising_edge(sig_en_25ms)) then
-            -- convert distance to integer
-            number <= to_integer(unsigned(dist1));
-           
-            -- split number to digits
-            digit0 <= number mod 10;
-            digit1 <= ((number - digit0) / 10) mod 10;
-            digit2 <= (((number - digit0) / 10 - digit1) /10) mod 10;
+        if (rising_edge(clk)) then
+            if sig_en_25ms = '1' then
 
-            digit01 <= number mod 10;
-            digit11 <= ((number - digit0) / 10) mod 10;
-            digit21 <= (((number - digit0) / 10 - digit1) /10) mod 10;
+                -- convert distance to integer
+                number <= to_integer(unsigned(dist1));
             
-            digit0Out  <= std_logic_vector(to_unsigned(digit0, 4));
-            digit1Out  <= std_logic_vector(to_unsigned(digit1, 4));
-            digit2Out  <= std_logic_vector(to_unsigned(digit2, 4));
-            digit01Out  <= std_logic_vector(to_unsigned(digit01, 4));
-            digit11Out  <= std_logic_vector(to_unsigned(digit11, 4));
-            digit21Out  <= std_logic_vector(to_unsigned(digit21, 4));
-            
-            case currentDigit is
-                when 0 =>
-                    --digit <= number mod 10;
-                    digitOut <= digit0Out;
-                    AN <= "11111110";
-                    DP <= '1';
-                    currentDigit <= 1;
-                when 1 =>
-                    --digit <= ((number) / 10) mod 10;
-                    digitOut <= digit1Out;
-                    AN <= "11111101";
-                    DP <= '1';
-                    currentDigit <= 2;
-                when 2 =>
-                    --digit <= (number / 100) mod 10;
-                    digitOut <= digit2Out;
-                    AN <= "11111011";
-                    DP <= '1';
-                    currentDigit <= 3;
-                when 3 =>
-                    --digit <= (number / 100) mod 10;
-                    digitOut <= digit01Out;
-                    AN <= "11101111";
-                    DP <= '1';
-                    currentDigit <= 4;
-                when 4 =>
-                    --digit <= (number / 100) mod 10;
-                    digitOut <= digit11Out;
-                    AN <= "11011111";
-                    DP <= '1';
-                    currentDigit <= 5;
-                when 5 =>
-                    --digit <= (number / 100) mod 10;
-                    digitOut <= digit21Out;
-                    AN <= "10111111";
-                    DP <= '1';
-                    currentDigit <= 0;
-                when others =>
-                    currentDigit <= 0;
-                    
-            end case;
-            
+                -- split number to digits
+                digit0 <= number mod 10;
+                digit1 <= ((number - digit0) / 10) mod 10;
+                digit2 <= (((number - digit0) / 10 - digit1) /10) mod 10;
+
+                digit01 <= number mod 10;
+                digit11 <= ((number - digit0) / 10) mod 10;
+                digit21 <= (((number - digit0) / 10 - digit1) /10) mod 10;
+                
+                digit0Out  <= std_logic_vector(to_unsigned(digit0, 4));
+                digit1Out  <= std_logic_vector(to_unsigned(digit1, 4));
+                digit2Out  <= std_logic_vector(to_unsigned(digit2, 4));
+                digit01Out  <= std_logic_vector(to_unsigned(digit01, 4));
+                digit11Out  <= std_logic_vector(to_unsigned(digit11, 4));
+                digit21Out  <= std_logic_vector(to_unsigned(digit21, 4));
+                
+                case currentDigit is
+                    when 0 =>
+                        --digit <= number mod 10;
+                        digitOut <= digit0Out;
+                        AN <= "11111110";
+                        DP <= '1';
+                        currentDigit <= 1;
+                    when 1 =>
+                        --digit <= ((number) / 10) mod 10;
+                        digitOut <= digit1Out;
+                        AN <= "11111101";
+                        DP <= '1';
+                        currentDigit <= 2;
+                    when 2 =>
+                        --digit <= (number / 100) mod 10;
+                        digitOut <= digit2Out;
+                        AN <= "11111011";
+                        DP <= '1';
+                        currentDigit <= 3;
+                    when 3 =>
+                        --digit <= (number / 100) mod 10;
+                        digitOut <= digit01Out;
+                        AN <= "11101111";
+                        DP <= '1';
+                        currentDigit <= 4;
+                    when 4 =>
+                        --digit <= (number / 100) mod 10;
+                        digitOut <= digit11Out;
+                        AN <= "11011111";
+                        DP <= '1';
+                        currentDigit <= 5;
+                    when 5 =>
+                        --digit <= (number / 100) mod 10;
+                        digitOut <= digit21Out;
+                        AN <= "10111111";
+                        DP <= '1';
+                        currentDigit <= 0;
+                    when others =>
+                        currentDigit <= 0;
+                        
+                end case;
+            end if;
            
         end if;
 
     end process show_digit;
-    
-    -- OLD CODE
-    -- convert distance to integer
-    --number <= to_integer(unsigned(dist));
-    
-    -- split number to digits
-    --digit0 <= number mod 10;
-    --digit1 <= ((number - digit0) / 10) mod 10;
-    --digit2 <= (((number - digit0) / 10 - digit1) /10) mod 10;
-
-    --digit0Out  <= std_logic_vector(to_unsigned(digit0, 4));
-    --digit1Out  <= std_logic_vector(to_unsigned(digit1, 4));
-    --digit2Out  <= std_logic_vector(to_unsigned(digit2, 4));
-
 
 end Behavioral;
