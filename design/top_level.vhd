@@ -86,14 +86,14 @@ begin
 
     -- distance sensor 1
     DISTANCE1 : distance
-    Port map(   clk => clk,
+    Port map(   clk => CLK100MHZ,
                 echo => ECHO(0),
                 dist => dist1
     );
 
     -- distance sensor 2
     DISTANCE2 : distance
-    Port map(   clk => clk,
+    Port map(   clk => CLK100MHZ,
                 echo => ECHO(1),
                 dist => dist2
     );
