@@ -26,16 +26,18 @@ begin
 
     stimuli : process
     begin
-        -- EDIT Adapt initialization as needed
-        
-        dist <= "000100000";
-
-
-       
-        
-
+        -- EDIT Adapt initialization as needed 
+        dist <= "011000111";
+        wait for 100ns;
+        dist <= "111000111";
+        wait for 200ns;
+        dist <= "000010111";
+        wait for 200ns;
+        dist <= "001000110";
+        wait for 200ns;
+        dist <= "000001011";
+        wait for 200ns;
         -- EDIT Add stimuli here
-
         wait;
     end process;
 

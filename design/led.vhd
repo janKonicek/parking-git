@@ -55,109 +55,28 @@ begin
 --    LED_A(7 downto 0) <= (others => '1');
 --end if;
 
+
+P_LED : process(dist) is
 begin
-LED : process(dist) is
-begin
-if dist(8) = '1' then
-
-LED_A(7) <= '0';
-LED_A(6) <= '0';
-LED_A(5) <= '0';
-LED_A(4) <= '0';
-LED_A(3) <= '0';
-LED_A(2) <= '0';
-LED_A(1) <= '0';
-LED_A(0) <= '0';
-
-else if dist(7) = '1' then
-
-LED_A(7) <= '1';
-LED_A(6) <= '0';
-LED_A(5) <= '0';
-LED_A(4) <= '0';
-LED_A(3) <= '0';
-LED_A(2) <= '0';
-LED_A(1) <= '0';
-LED_A(0) <= '0';
-
-else if dist(6) = '1' then
-
-LED_A(7) <= '1';
-LED_A(6) <= '1';
-LED_A(5) <= '0';
-LED_A(4) <= '0';
-LED_A(3) <= '0';
-LED_A(2) <= '0';
-LED_A(1) <= '0';
-LED_A(0) <= '0';
-
-else if dist(5) = '1' then
-
-LED_A(7) <= '1';
-LED_A(6) <= '1';
-LED_A(5) <= '1';
-LED_A(4) <= '0';
-LED_A(3) <= '0';
-LED_A(2) <= '0';
-LED_A(1) <= '0';
-LED_A(0) <= '0';
-
-else if dist(4) = '1' then
-
-LED_A(7) <= '1';
-LED_A(6) <= '1';
-LED_A(5) <= '1';
-LED_A(4) <= '1';
-LED_A(3) <= '0';
-LED_A(2) <= '0';
-LED_A(1) <= '0';
-LED_A(0) <= '0';
-
-else if dist(3) = '1' then
-
-LED_A(7) <= '1';
-LED_A(6) <= '1';
-LED_A(5) <= '1';
-LED_A(4) <= '1';
-LED_A(3) <= '1';
-LED_A(2) <= '0';
-LED_A(1) <= '0';
-LED_A(0) <= '0';
-
-else if dist(2) = '1' then
-
-LED_A(7) <= '1';
-LED_A(6) <= '1';
-LED_A(5) <= '1';
-LED_A(4) <= '1';
-LED_A(3) <= '1';
-LED_A(2) <= '1';
-LED_A(1) <= '0';
-LED_A(0) <= '0';
-
-
-else if dist(1) = '1' then
-
-LED_A(7) <= '1';
-LED_A(6) <= '1';
-LED_A(5) <= '1';
-LED_A(4) <= '1';
-LED_A(3) <= '1';
-LED_A(2) <= '1';
-LED_A(1) <= '1';
-LED_A(0) <= '0';
-
-else if dist(0) = '1' then
-
-LED_A(7) <= '1';
-LED_A(6) <= '1';
-LED_A(5) <= '1';
-LED_A(4) <= '1';
-LED_A(3) <= '1';
-LED_A(2) <= '1';
-LED_A(1) <= '1';
-LED_A(0) <= '1';
+    if dist(8) = '1' then
+        LED_A <= "00000000";
+    elsif dist(7) = '1' then
+        LED_A <= "10000000";
+    elsif dist(6) = '1' then
+        LED_A <= "11000000";
+    elsif dist(5) = '1' then
+        LED_A <= "11100000";
+    elsif dist(4) = '1' then
+        LED_A <= "11110000";
+    elsif dist(3) = '1' then
+        LED_A <= "11111000";
+    elsif dist(2) = '1' then
+        LED_A <= "11111100";
+    elsif dist(1) = '1' then
+        LED_A <= "11111110"; 
+    elsif dist(0) = '1' then
+        LED_A <= "11111111";
 end if; 
 
-end process LED;
+end process P_LED;
 end Behavioral;
