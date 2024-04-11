@@ -25,18 +25,20 @@ use IEEE.NUMERIC_STD.ALL;
 
 
 entity display is
-    Port ( CLK100MHZ : in STD_LOGIC;
-           dist : in STD_LOGIC_VECTOR (8 downto 0);
-           CA : out STD_LOGIC;
-           CB : out STD_LOGIC;
-           CC : out STD_LOGIC;
-           CD : out STD_LOGIC;
-           CE : out STD_LOGIC;
-           CF : out STD_LOGIC;
-           CG : out STD_LOGIC;
-           DP : out STD_LOGIC := '1';
-           AN : out STD_LOGIC_VECTOR (7 downto 0) := "11111110"
-          );
+    Port ( 
+        clk : in STD_LOGIC;
+        dist1 : in STD_LOGIC_VECTOR (8 downto 0);
+        dist2 : in STD_LOGIC_VECTOR (8 downto 0);
+        CA : out STD_LOGIC;
+        CB : out STD_LOGIC;
+        CC : out STD_LOGIC;
+        CD : out STD_LOGIC;
+        CE : out STD_LOGIC;
+        CF : out STD_LOGIC;
+        CG : out STD_LOGIC;
+        DP : out STD_LOGIC := '1';
+        AN : out STD_LOGIC_VECTOR (7 downto 0) := "11111110"
+    );
     
     -- number integer signal
     signal number : integer := 0;
@@ -46,12 +48,20 @@ entity display is
     signal digit1 : integer := 0;
     signal digit2 : integer := 0;
 
+    signal digit01 : integer := 0;
+    signal digit11 : integer := 0;
+    signal digit21 : integer := 0;
+    
     signal digit : integer := 0;
     
     -- digit signals converted to std_logic_vector
     signal digit0Out : std_logic_vector (3 downto 0);
     signal digit1Out : std_logic_vector (3 downto 0);
     signal digit2Out : std_logic_vector (3 downto 0);
+
+    signal digit01Out : std_logic_vector (3 downto 0);
+    signal digit11Out : std_logic_vector (3 downto 0);
+    signal digit21Out : std_logic_vector (3 downto 0);
 
     signal digitOut : std_logic_vector (3 downto 0);
 
@@ -80,7 +90,7 @@ architecture Behavioral of display is
     signal sig_en_25ms : std_logic;  
 
     -- signal for current digit
-    signal currentDigit : integer range 0 to 3 := 0;
+    signal currentDigit : integer range 0 to 6 := 0;
 
 
 begin
@@ -88,7 +98,7 @@ begin
     -- Component instantiation of clock enable for 25 ms
     CLK_EN : clock_enable
     Port map (
-        clk => CLK100MHz,
+        clk => clk,
         rst => '0',
         pulse => sig_en_25ms
     );
@@ -111,36 +121,67 @@ begin
     
         if (rising_edge(sig_en_25ms)) then
             -- convert distance to integer
-            number <= to_integer(unsigned(dist));
-
+            number <= to_integer(unsigned(dist1));
+           
             -- split number to digits
             digit0 <= number mod 10;
             digit1 <= ((number - digit0) / 10) mod 10;
             digit2 <= (((number - digit0) / 10 - digit1) /10) mod 10;
 
+            digit01 <= number mod 10;
+            digit11 <= ((number - digit0) / 10) mod 10;
+            digit21 <= (((number - digit0) / 10 - digit1) /10) mod 10;
+            
             digit0Out  <= std_logic_vector(to_unsigned(digit0, 4));
             digit1Out  <= std_logic_vector(to_unsigned(digit1, 4));
             digit2Out  <= std_logic_vector(to_unsigned(digit2, 4));
+            digit01Out  <= std_logic_vector(to_unsigned(digit01, 4));
+            digit11Out  <= std_logic_vector(to_unsigned(digit11, 4));
+            digit21Out  <= std_logic_vector(to_unsigned(digit21, 4));
             
             case currentDigit is
                 when 0 =>
+                    --digit <= number mod 10;
                     digitOut <= digit0Out;
                     AN <= "11111110";
                     DP <= '1';
                     currentDigit <= 1;
                 when 1 =>
+                    --digit <= ((number) / 10) mod 10;
                     digitOut <= digit1Out;
                     AN <= "11111101";
                     DP <= '1';
                     currentDigit <= 2;
                 when 2 =>
+                    --digit <= (number / 100) mod 10;
                     digitOut <= digit2Out;
                     AN <= "11111011";
+                    DP <= '1';
+                    currentDigit <= 3;
+                when 3 =>
+                    --digit <= (number / 100) mod 10;
+                    digitOut <= digit01Out;
+                    AN <= "11101111";
+                    DP <= '1';
+                    currentDigit <= 4;
+                when 4 =>
+                    --digit <= (number / 100) mod 10;
+                    digitOut <= digit11Out;
+                    AN <= "11011111";
+                    DP <= '1';
+                    currentDigit <= 5;
+                when 5 =>
+                    --digit <= (number / 100) mod 10;
+                    digitOut <= digit21Out;
+                    AN <= "10111111";
                     DP <= '1';
                     currentDigit <= 0;
                 when others =>
                     currentDigit <= 0;
+                    
             end case;
+            
+           
         end if;
 
     end process show_digit;

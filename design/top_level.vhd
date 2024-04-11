@@ -60,8 +60,9 @@ architecture Behavioral of top_level is
 
     component display
         port (
-            CLK100MHZ : in std_logic;
-            dist      : in std_logic_vector (8 downto 0);
+            clk       : in std_logic;
+            dist1     : in std_logic_vector (8 downto 0);
+            dist2     : in STD_LOGIC_VECTOR (8 downto 0);
             CA        : out std_logic;
             CB        : out std_logic;
             CC        : out std_logic;
@@ -99,8 +100,9 @@ begin
 
     -- display
     DISPLAY_OUTPUT : display
-    Port map(   CLK100MHZ => CLK100MHZ,
-                dist => dist1,
+    Port map(   clk => CLK100MHZ,
+                dist1 => dist1,
+                dist2 => dist2,
                 CA => CA,
                 CB => CB,
                 CC => CC,
