@@ -62,6 +62,10 @@ begin
         LED <= "11111110"; 
     elsif dist(2) = '1' then
         LED <= "11111111";
+    elsif dist(1) = '1' then
+        LED <= "11111111";
+    elsif dist(0) = '1' then
+        LED <= "11111111";
     end if; 
 
 end process P_LED;
