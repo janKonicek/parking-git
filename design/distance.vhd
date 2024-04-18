@@ -75,14 +75,16 @@ begin
     neg_edge <= '1' when (echo = '0' and echo_delayed = '1') else '0';  
            
     -- counter in cm
-    count: process (clk_en) is
+    count: process (clk) is
     begin
-       if rising_edge(clk_en) then
-          if echo='1' then
-             sig_count <= sig_count + 1;
-          -- counter reset   
-          elsif echo='0' then
-             sig_count <= (others => '0');
+       if rising_edge(clk) then
+          if clk_en='1' then
+            if echo='1' then
+               sig_count <= sig_count + 1;
+            -- counter reset   
+            elsif echo='0' then
+               sig_count <= (others => '0');
+            end if;
           end if;
        end if;
     end process;
