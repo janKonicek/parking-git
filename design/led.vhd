@@ -50,13 +50,13 @@ begin
         LED <= "10000000";
     elsif dist(6) = '1' then
         LED <= "11000000";
-    elsif dist(5) = '1' then
-        LED <= "11100000";
     elsif dist(5) = '1' and dist(4) = '1' then
+        LED <= "11100000";
+    elsif dist(5) = '1' then
         LED <= "11110000";
-    elsif dist(4) = '1' then
-        LED <= "11111000";
     elsif dist(4) = '1' and dist(3) = '1' then
+        LED <= "11111000";
+    elsif dist(4) = '1' then
         LED <= "11111100";
     elsif dist(3) = '1' and dist(2) = '1' then
         LED <= "11111110"; 
