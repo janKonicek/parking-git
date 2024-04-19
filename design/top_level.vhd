@@ -28,6 +28,7 @@ entity top_level is
            CLK100MHZ : in STD_LOGIC;
            TRIG : out STD_LOGIC_VECTOR (1 downto 0);
            ECHO : in STD_LOGIC_VECTOR (1 downto 0);
+           SW : in STD_LOGIC_VECTOR (1 downto 0);
            CA : out STD_LOGIC;
            CB : out STD_LOGIC;
            CC : out STD_LOGIC;
@@ -53,7 +54,8 @@ architecture Behavioral of top_level is
     
     component sensor
         port ( 
-            clk    : in std_logic; 
+            clk    : in std_logic;
+            enable : in std_logic; 
             trig   : out std_logic
             );
     end component;
@@ -81,26 +83,31 @@ architecture Behavioral of top_level is
     
    port ( 
             dist : in STD_LOGIC_VECTOR (8 downto 0):= (others => '0');
-            LED_A : out STD_LOGIC_VECTOR (7 downto 0):= (others => '0')
+            LED : out STD_LOGIC_VECTOR (7 downto 0):= (others => '0')
             );
     end component;
 
     -- internal distance signals
     signal dist1, dist2 : std_logic_vector (8 downto 0);
     
+    signal trig1 : std_logic;
+    
 begin
-
+        
     -- distance trigger 1
     TRIGGER1 : sensor
     Port map(   clk => CLK100MHZ,
+                enable => SW(0),
                 trig => TRIG(0)      
             );
             
     -- distance trigger 2
     TRIGGER2 : sensor
     Port map(   clk => CLK100MHZ,
-                trig => TRIG(1)      
+                enable => SW(1),
+                trig => TRIG(1)
             );
+
 
     -- distance sensor 1
     DISTANCE1 : distance
@@ -135,12 +142,12 @@ begin
     -- LEDs
     LED_LEFT : led
     Port map(   dist => dist1,
-                LED_A => LED_L
+                LED => LED_R
     );
 
     LED_RIGHT : led
     Port map(   dist => dist2,
-                LED_A => LED_R
+                LED => LED_L
     );
 
 

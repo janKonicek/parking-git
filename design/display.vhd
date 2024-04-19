@@ -15,7 +15,6 @@
 -- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
--- 
 ----------------------------------------------------------------------------------
 
 
@@ -39,10 +38,31 @@ entity display is
         DP : out STD_LOGIC := '1';
         AN : out STD_LOGIC_VECTOR (7 downto 0) := "11111110"
     );
-    
+end display;
+
+architecture Behavioral of display is
+
+    -- Component bin2seg declaration
+    component bin2seg is
+        Port ( clear : in STD_LOGIC;
+                bin : in STD_LOGIC_VECTOR (3 downto 0);
+                seg : out STD_LOGIC_VECTOR (6 downto 0));
+    end component;
+
+    -- Component clock_enable declaration for 25 ms
+    component clock_enable is
+        generic (
+            PERIOD : integer := 2500
+        );
+        Port ( clk : in STD_LOGIC;
+               rst : in STD_LOGIC;
+               pulse : out STD_LOGIC);
+    end component clock_enable;
+
     -- number integer signal
     signal number : integer := 0;
-    
+    signal number2 : integer := 0;
+
     -- digit signals
     signal digit0 : integer := 0;
     signal digit1 : integer := 0;
@@ -64,27 +84,6 @@ entity display is
     signal digit21Out : std_logic_vector (3 downto 0);
 
     signal digitOut : std_logic_vector (3 downto 0);
-
-end display;
-
-architecture Behavioral of display is
-
-    -- Component bin2seg declaration
-    component bin2seg is
-        Port ( clear : in STD_LOGIC;
-                bin : in STD_LOGIC_VECTOR (3 downto 0);
-                seg : out STD_LOGIC_VECTOR (6 downto 0));
-    end component;
-
-    -- Component clock_enable declaration for 25 ms
-    component clock_enable is
-        generic (
-            PERIOD : integer := 2500
-        );
-        Port ( clk : in STD_LOGIC;
-               rst : in STD_LOGIC;
-               pulse : out STD_LOGIC);
-    end component clock_enable;
 
     -- signal for 25 ms
     signal sig_en_25ms : std_logic;  
@@ -124,57 +123,46 @@ begin
 
                 -- convert distance to integer
                 number <= to_integer(unsigned(dist1));
+                number2 <= to_integer(unsigned(dist2));
             
                 -- split number to digits
                 digit0 <= number mod 10;
                 digit1 <= ((number - digit0) / 10) mod 10;
                 digit2 <= (((number - digit0) / 10 - digit1) /10) mod 10;
 
-                digit01 <= number mod 10;
-                digit11 <= ((number - digit0) / 10) mod 10;
-                digit21 <= (((number - digit0) / 10 - digit1) /10) mod 10;
+                digit01 <= number2 mod 10;
+                digit11 <= ((number2  - digit01) / 10) mod 10;
+                digit21 <= (((number2 - digit01) / 10 - digit11) /10) mod 10;
                 
-                digit0Out  <= std_logic_vector(to_unsigned(digit0, 4));
-                digit1Out  <= std_logic_vector(to_unsigned(digit1, 4));
-                digit2Out  <= std_logic_vector(to_unsigned(digit2, 4));
-                digit01Out  <= std_logic_vector(to_unsigned(digit01, 4));
-                digit11Out  <= std_logic_vector(to_unsigned(digit11, 4));
-                digit21Out  <= std_logic_vector(to_unsigned(digit21, 4));
                 
                 case currentDigit is
                     when 0 =>
-                        --digit <= number mod 10;
-                        digitOut <= digit0Out;
+                        digitOut <= std_logic_vector(to_unsigned(digit0, 4));
                         AN <= "11111110";
                         DP <= '1';
                         currentDigit <= 1;
                     when 1 =>
-                        --digit <= ((number) / 10) mod 10;
-                        digitOut <= digit1Out;
+                        digitOut <= std_logic_vector(to_unsigned(digit1, 4));
                         AN <= "11111101";
                         DP <= '1';
                         currentDigit <= 2;
                     when 2 =>
-                        --digit <= (number / 100) mod 10;
-                        digitOut <= digit2Out;
+                        digitOut <= std_logic_vector(to_unsigned(digit2, 4));
                         AN <= "11111011";
                         DP <= '1';
                         currentDigit <= 3;
                     when 3 =>
-                        --digit <= (number / 100) mod 10;
-                        digitOut <= digit01Out;
+                        digitOut <= std_logic_vector(to_unsigned(digit01, 4));
                         AN <= "11101111";
                         DP <= '1';
                         currentDigit <= 4;
                     when 4 =>
-                        --digit <= (number / 100) mod 10;
-                        digitOut <= digit11Out;
+                        digitOut <= std_logic_vector(to_unsigned(digit11, 4));
                         AN <= "11011111";
                         DP <= '1';
                         currentDigit <= 5;
                     when 5 =>
-                        --digit <= (number / 100) mod 10;
-                        digitOut <= digit21Out;
+                        digitOut <= std_logic_vector(to_unsigned(digit21, 4));
                         AN <= "10111111";
                         DP <= '1';
                         currentDigit <= 0;

@@ -27,6 +27,7 @@ use ieee.numeric_std.all; -- Package for data types conversion
 entity sensor is
         Port ( 
            clk : in STD_LOGIC; 
+           enable : in STD_LOGIC;
            trig : out STD_LOGIC 
         );
 end sensor;
@@ -80,6 +81,10 @@ begin
             if sig_clk_10u = '1' and is_pulse = 1 then
                 sig_trig <= '0';
                 is_pulse <= 0;
+            end if;
+            
+            if enable = '0' then
+                sig_trig <= '0';
             end if;
             
             
