@@ -26,7 +26,6 @@ This project is implemented using the following hardware components:
 ![image](https://github.com/janKonicek/parking-git/assets/93183489/474df8db-e183-4e10-91af-cf07379e7d18)
 
 The **Nexys A7 board** is used to implement the VHDL code for the Smart Parking System, and the HC-SR04 sensor is used to measure the distance to the nearest object, which is used to determine whether a parking space is occupied.
-![IMG_20240412_102940~2](https://github.com/janKonicek/parking-git/assets/93183489/9468692e-0fee-4770-8775-8740f2afcc37)
 
 3. **Arduino Uno**: This is a microcontroller board based on the ATmega328P. It has 14 digital input/output pins, 6 analog inputs, a 16 MHz quartz crystal, a USB connection, and a power jack. It contains everything needed to support the microcontroller and can be easily connected to a computer with a USB cable or powered by an AC-to-DC adapter or battery to get started. In this project, the Arduino Uno is used to supply the 5V power needed by the HC-SR04 ultrasonic sensors.
 ![image](https://github.com/janKonicek/parking-git/assets/93183489/d88f189f-c7eb-49b9-8463-163a6273231d)
@@ -45,13 +44,21 @@ The software for this project is written in VHDL and consists of several compone
 - `top_level.vhd`: This is the top-level component that integrates all the other components.
 
 ## Component(s) Simulation
-Write descriptive text and put simulation screenshots of your components. The testbenches for the components are:
+The testbenches for the components are:
 - `tb_display.vhd`
 - `tb_distance.vhd`
 - `tb_led.vhd`
 - `tb_sensor.vhd`
 
 ## Instructions
-Write an instruction manual for your application, including photos and a link to a short app video.
+![IMG_20240412_102940~2](https://github.com/janKonicek/parking-git/assets/93183489/9468692e-0fee-4770-8775-8740f2afcc37)
+The Smart Parking System is easy to use, it works when plugged in, and two switches are used to freeze each sensor's measurement. 
+
+## Video
+https://github.com/janKonicek/parking-git/assets/93183489/302440c0-55d8-4ca7-a923-a255e0fe7655
 
 ## References
+[Vivado Design Suite](https://www.xilinx.com/products/design-tools/vivado.html)
+[Nexys A7 reference manual](https://digilent.com/reference/programmable-logic/nexys-a7/reference-manual)
+[Ultrasonic sensor datasheet](https://dratek.cz/docs/produkty/0/773/eses1500636000.pdf)
+
