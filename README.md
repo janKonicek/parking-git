@@ -59,7 +59,9 @@ The Smart Parking System is easy to use, it works when plugged in, and two switc
 https://github.com/janKonicek/parking-git/assets/93183489/302440c0-55d8-4ca7-a923-a255e0fe7655
 
 ## References
-[Vivado Design Suite](https://www.xilinx.com/products/design-tools/vivado.html)
-[Nexys A7 reference manual](https://digilent.com/reference/programmable-logic/nexys-a7/reference-manual)
+[Vivado Design Suite](https://www.xilinx.com/products/design-tools/vivado.html)  
+
+[Nexys A7 reference manual](https://digilent.com/reference/programmable-logic/nexys-a7/reference-manual)  
+
 [Ultrasonic sensor datasheet](https://dratek.cz/docs/produkty/0/773/eses1500636000.pdf)
 
