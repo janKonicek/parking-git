@@ -27,7 +27,7 @@ This project is implemented using the following hardware components:
 
 The **Nexys A7 board** is used to implement the VHDL code for the Smart Parking System, and the HC-SR04 sensor is used to measure the distance to the nearest object, which is used to determine whether a parking space is occupied.
 
-3. **Arduino Uno**: This is a microcontroller board based on the ATmega328P. It has 14 digital input/output pins, 6 analog inputs, a 16 MHz quartz crystal, a USB connection, and a power jack. It contains everything needed to support the microcontroller and can be easily connected to a computer with a USB cable or powered by an AC-to-DC adapter or battery to get started. In this project, the Arduino Uno is used to supply the 5V power needed by the HC-SR04 ultrasonic sensors.
+3. **Arduino Uno**: This is a microcontroller board based on the ATmega328P. It has 14 digital input/output pins, 6 analog inputs, a 16 MHz quartz crystal, a USB connection, and a power jack. It contains everything needed to support the microcontroller. It can be easily connected to a computer with a USB cable or powered by an AC-to-DC adapter or battery. In this project, the Arduino Uno is used to supply the 5V power needed by the HC-SR04 ultrasonic sensors.
 ![image](https://github.com/janKonicek/parking-git/assets/93183489/d88f189f-c7eb-49b9-8463-163a6273231d)
 
 
