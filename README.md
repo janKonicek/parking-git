@@ -43,6 +43,8 @@ The software for this project is written in VHDL and consists of several compone
 - [`sensor.vhd`](./design/sensor.vhd): This component is responsible for creating trigger signal for ultrasonic sensors.
 - [`top_level.vhd`](./design/top_level.vhd): This is the top-level component that integrates all the other components.
 
+### Schematic
+![image](https://github.com/janKonicek/parking-git/assets/47054496/dc1b9d4b-f064-4244-9e75-ac0f7db58fcc)
 
 ## Component(s) Simulation
 The testbenches for the components are:
