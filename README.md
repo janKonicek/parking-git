@@ -35,21 +35,21 @@ The **Nexys A7 board** is used to implement the VHDL code for the Smart Parking 
 ## Software Description
 The software for this project is written in VHDL and consists of several components. Here is a brief description of the main components:
 
-- `bin2seg.vhd`: This component decodes binary input into a 7-segment display output for a Common Anode configuration.
-- `clock_enable.vhd`: This component is a clock divider that generates a pulse every `PERIOD` clock cycle.
-- `display.vhd`: This component displays the measured distance on a 7-segment display.
-- `distance.vhd`: This component measures the distance using an ultrasonic sensor.
-- `led.vhd`: This component is responsible for ...
-- `sensor.vhd`: This component is responsible for ...
-- `simple_counter.vhd`: This component is responsible for ...
-- `top_level.vhd`: This is the top-level component that integrates all the other components.
+- [`bin2seg.vhd`](./design/bin2seg.vhd): This component decodes binary input into a 7-segment display output for a Common Anode configuration.
+- [`clock_enable.vhd`](./design/clock_enable.vhd): This component is a clock divider that generates a pulse every `PERIOD` clock cycle.
+- [`display.vhd`](./design/display.vhd): This component displays the measured distances from both sensors on a two 4 digit 7-segment display.
+- [`distance.vhd`](./design/distance.vhd): This component reads the distance from connected ultrasonic sensor.
+- [`led.vhd`](./design/led.vhd): This component is responsible for ...
+- [`sensor.vhd`](./design/sensor.vhd): This component is responsible for creating trigger signal for ultrasonic sensors.
+- [`top_level.vhd`](./design/top_level.vhd): This is the top-level component that integrates all the other components.
+
 
 ## Component(s) Simulation
 The testbenches for the components are:
-- `tb_display.vhd`
-- `tb_distance.vhd`
-- `tb_led.vhd`
-- `tb_sensor.vhd`
+- [`tb_display.vhd`](./simulation/tb_display.vhd)
+- [`tb_distance.vhd`](./simulation/tb_distance.vhd)
+- [`tb_led.vhd`](./simulation/tb_led.vhd)
+- [`tb_sensor.vhd`](./simulation/tb_sensor.vhd)
 
 ## Instructions
 ![IMG_20240412_102940~2](https://github.com/janKonicek/parking-git/assets/93183489/9468692e-0fee-4770-8775-8740f2afcc37)  
@@ -65,3 +65,4 @@ https://github.com/janKonicek/parking-git/assets/93183489/302440c0-55d8-4ca7-a92
 
 [Ultrasonic sensor datasheet](https://dratek.cz/docs/produkty/0/773/eses1500636000.pdf)
 
+[BPC-DE1 VHDL Course](https://github.com/tomas-fryza/vhdl-course/)

@@ -7,14 +7,17 @@
 -- Module Name: display - Behavioral
 -- Project Name: Smart parking system
 -- Target Devices: Nexys A7-50T
--- Tool Versions: 2023.2
--- Description: 
+-- Tool Versions: Vivado 2023.2
+-- Description: Display distance on two 4 digit 7 segement displays 
 -- 
--- Dependencies: IEEE.STD_LOGIC_1164 and IEEE.NUMERIC_STD
+-- Dependencies: 
+--      IEEE.STD_LOGIC_1164
+--      IEEE.NUMERIC_STD
 -- 
 -- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
+--
 ----------------------------------------------------------------------------------
 
 
@@ -25,9 +28,9 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity display is
     Port ( 
-        clk : in STD_LOGIC;
-        dist1 : in STD_LOGIC_VECTOR (8 downto 0);
-        dist2 : in STD_LOGIC_VECTOR (8 downto 0);
+        clk : in STD_LOGIC;                                     -- device clock (100 MHz)
+        dist1 : in STD_LOGIC_VECTOR (8 downto 0);               -- distance vector from first sensor
+        dist2 : in STD_LOGIC_VECTOR (8 downto 0);               -- distance vector from second sensor
         CA : out STD_LOGIC;
         CB : out STD_LOGIC;
         CC : out STD_LOGIC;
@@ -73,15 +76,6 @@ architecture Behavioral of display is
     signal digit21 : integer := 0;
     
     signal digit : integer := 0;
-    
-    -- digit signals converted to std_logic_vector
-    signal digit0Out : std_logic_vector (3 downto 0);
-    signal digit1Out : std_logic_vector (3 downto 0);
-    signal digit2Out : std_logic_vector (3 downto 0);
-
-    signal digit01Out : std_logic_vector (3 downto 0);
-    signal digit11Out : std_logic_vector (3 downto 0);
-    signal digit21Out : std_logic_vector (3 downto 0);
 
     signal digitOut : std_logic_vector (3 downto 0);
 
@@ -125,7 +119,7 @@ begin
                 number <= to_integer(unsigned(dist1));
                 number2 <= to_integer(unsigned(dist2));
             
-                -- split number to digits
+                -- split number into digits
                 digit0 <= number mod 10;
                 digit1 <= ((number - digit0) / 10) mod 10;
                 digit2 <= (((number - digit0) / 10 - digit1) /10) mod 10;
@@ -135,6 +129,7 @@ begin
                 digit21 <= (((number2 - digit01) / 10 - digit11) /10) mod 10;
                 
                 
+                -- show digit
                 case currentDigit is
                     when 0 =>
                         digitOut <= std_logic_vector(to_unsigned(digit0, 4));

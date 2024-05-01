@@ -1,17 +1,19 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: Team
+-- Engineer: Jan Konicek
 -- 
 -- Create Date: 28.03.2024 09:16:46
--- Design Name: 
+-- Design Name: sensor
 -- Module Name: sensor - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
+-- Project Name: Smart parking system
+-- Target Devices: Nexys A7-50T
+-- Tool Versions: Vivado 2023.2
+-- Description: Component for reading incomming messages from connected sensor
 -- 
 -- Dependencies: 
--- 
+--      IEEE.STD_LOGIC_1164.ALL 
+--      IEEE.NUMERIC_STD.all 
+--
 -- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
@@ -21,14 +23,14 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use ieee.numeric_std.all; -- Package for data types conversion
+use IEEE.NUMERIC_STD.all; -- Package for data types conversion
 
 
 entity sensor is
         Port ( 
-           clk : in STD_LOGIC; 
-           enable : in STD_LOGIC;
-           trig : out STD_LOGIC 
+           clk : in STD_LOGIC;            -- device clock (100 MHz)  
+           enable : in STD_LOGIC;         -- on/off triggering sensor
+           trig : out STD_LOGIC           -- output trigger signal
         );
 end sensor;
 
@@ -50,6 +52,7 @@ architecture Behavioral of sensor is
     signal is_pulse : integer := 1;
 begin
 
+    -- component for generating 60ms pulse
     CLK_60M : clock_enable
     generic map (
         PERIOD => 6000000
@@ -60,6 +63,7 @@ begin
         pulse => sig_clk_60m
     );
 
+    -- component for generating 60ms pulse
     CLK_10U : clock_enable
     generic map (
         PERIOD => 1000
@@ -70,6 +74,7 @@ begin
         pulse => sig_clk_10u
     );
     
+    -- creates 10us pulse every 60ms
     trigger : process (clk) is
     begin
         if rising_edge(clk) then
@@ -86,8 +91,6 @@ begin
             if enable = '0' then
                 sig_trig <= '0';
             end if;
-            
-            
         end if;
 
     end process trigger;
