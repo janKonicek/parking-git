@@ -3,7 +3,7 @@
 ## Team Members
 - **Jan Koníček**
 - **Marek Klvaňa**
-- **Martin Koplík**
+- **Martin Koplík** - Responsible for programming [`led.vhd`](./design/led.vhd) and helped video recording.
 - **Vojtěch Larva**
 
 ## Theoretical Description and Explanation
@@ -39,7 +39,7 @@ The software for this project is written in VHDL and consists of several compone
 - [`clock_enable.vhd`](./design/clock_enable.vhd): This component is a clock divider that generates a pulse every `PERIOD` clock cycle.
 - [`display.vhd`](./design/display.vhd): This component displays the measured distances from both sensors on a two 4 digit 7-segment display.
 - [`distance.vhd`](./design/distance.vhd): This component reads the distance from connected ultrasonic sensor.
-- [`led.vhd`](./design/led.vhd): This component is responsible for ...
+- [`led.vhd`](./design/led.vhd): This component is responsible for assigning the obtained distance to the correct led.
 - [`sensor.vhd`](./design/sensor.vhd): This component is responsible for creating trigger signal for ultrasonic sensors.
 - [`top_level.vhd`](./design/top_level.vhd): This is the top-level component that integrates all the other components.
 
