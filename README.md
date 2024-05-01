@@ -1,10 +1,10 @@
 # Smart Parking System with Ultrasonic Sensors
 
 ## Team Members
-- **Jan Koníček**
+- **Jan Koníček** - Responsible for programming [`sensor.vhd`](./design/sensor.vhd), [`display.vhd`](./design/display.vhd), [`top_level.vhd`](./design/top_level.vhd)
 - **Marek Klvaňa** - Responsible for programming [`distance.vhd`](./design/distance.vhd)
 - **Martin Koplík** - Responsible for programming [`led.vhd`](./design/led.vhd) and helped with video recording.
-- **Vojtěch Larva**
+- **Vojtěch Larva** - Responsible for readme, and helped with programming
 
 ## Theoretical Description and Explanation
 A **Smart Parking System** is designed to identify the presence or absence of an object in a designated space, simulating a parking slot. It uses an **ultrasonic sensor** to measure the distance between the sensor and the object. The sensor sends out an ultrasonic wave, which bounces back when it hits an object. By measuring the time it takes for the wave to return, the sensor can calculate the distance to the object.
@@ -49,12 +49,20 @@ The software for this project is written in VHDL and consists of several compone
 ## Component(s) Simulation
 The testbenches for the components are:
 - [`tb_display.vhd`](./simulation/tb_display.vhd)
+  ![image](https://github.com/janKonicek/parking-git/assets/47054496/9cf4548d-708e-47a6-929a-b0487d36a3f6)
+  This simulation shows displaying distance 1 on both 4 digit displays.
+  
 - [`tb_distance.vhd`](./simulation/tb_distance.vhd)
+  ![image](https://github.com/janKonicek/parking-git/assets/47054496/73680926-aa5c-4566-a8d9-46da46c10625)
+  This simulation shows decoded signal from sensor.
+  
 - [`tb_led.vhd`](./simulation/tb_led.vhd)
   ![image](https://github.com/janKonicek/parking-git/assets/166374341/7f26d461-a659-42e7-9f06-5abc31373673)
   This simulation shows which LED is lit up by the obtained distance.
+  
 - [`tb_sensor.vhd`](./simulation/tb_sensor.vhd)
-  ![image](https://github.com/janKonicek/parking-git/assets/47054496/8c62ae4e-8558-42c7-ad6e-ae80146ac67c) This simulation shows 10us trigger.
+  ![image](https://github.com/janKonicek/parking-git/assets/47054496/e1a86117-627e-4b5b-b8c5-bda9745e59a9)
+  This simulation shows 10us trigger.
 
 
 
