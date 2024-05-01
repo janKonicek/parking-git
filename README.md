@@ -52,6 +52,7 @@ The testbenches for the components are:
 - [`tb_distance.vhd`](./simulation/tb_distance.vhd)
 - [`tb_led.vhd`](./simulation/tb_led.vhd)
   ![image](https://github.com/janKonicek/parking-git/assets/166374341/7f26d461-a659-42e7-9f06-5abc31373673)
+  This simulation shows which LED is lit up by the obtained distance.
 - [`tb_sensor.vhd`](./simulation/tb_sensor.vhd)
 
 ## Instructions
