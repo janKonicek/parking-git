@@ -3,7 +3,7 @@
 ## Team Members
 - **Jan Koníček** - Responsible for programming [`sensor.vhd`](./design/sensor.vhd), [`display.vhd`](./design/display.vhd), [`top_level.vhd`](./design/top_level.vhd)
 - **Marek Klvaňa** - Responsible for programming [`distance.vhd`](./design/distance.vhd)
-- **Martin Koplík** - Responsible for programming [`led.vhd`](./design/led.vhd) and helped with video recording.
+- **Martin Koplík** - Responsible for programming [`led.vhd`](./design/led.vhd), and helped with video recording.
 - **Vojtěch Larva** - Responsible for readme, and helped with programming
 
 ## Theoretical Description and Explanation
