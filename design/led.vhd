@@ -1,16 +1,16 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: Team
+-- Engineer: Martin Koplík
 -- 
 -- Create Date: 11.04.2024 09:21:22
--- Design Name: 
+-- Design Name: led
 -- Module Name: led - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
+-- Project Name: Smart parking system
+-- Target Devices: Nexys A7-50T
+-- Tool Versions: Vivado 2023.2
+-- Description: This component is responsible for assigning the obtained distance to the correct LED.
 -- 
--- Dependencies: 
+-- Dependencies: IEEE.STD_LOGIC_1164
 -- 
 -- Revision:
 -- Revision 0.01 - File Created
