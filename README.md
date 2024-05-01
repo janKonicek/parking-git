@@ -52,7 +52,7 @@ The testbenches for the components are:
 - `tb_sensor.vhd`
 
 ## Instructions
-![IMG_20240412_102940~2](https://github.com/janKonicek/parking-git/assets/93183489/9468692e-0fee-4770-8775-8740f2afcc37)
+![IMG_20240412_102940~2](https://github.com/janKonicek/parking-git/assets/93183489/9468692e-0fee-4770-8775-8740f2afcc37)  
 The Smart Parking System is easy to use, it works when plugged in, and two switches are used to freeze each sensor's measurement. 
 
 ## Video
