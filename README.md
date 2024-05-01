@@ -3,7 +3,7 @@
 ## Team Members
 - **Jan Koníček**
 - **Marek Klvaňa**
-- **Martin Koplík** - Responsible for programming [`led.vhd`](./design/led.vhd) and helped video recording.
+- **Martin Koplík** - Responsible for programming [`led.vhd`](./design/led.vhd) and helped with video recording.
 - **Vojtěch Larva**
 
 ## Theoretical Description and Explanation
