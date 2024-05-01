@@ -54,6 +54,9 @@ The testbenches for the components are:
   ![image](https://github.com/janKonicek/parking-git/assets/166374341/7f26d461-a659-42e7-9f06-5abc31373673)
   This simulation shows which LED is lit up by the obtained distance.
 - [`tb_sensor.vhd`](./simulation/tb_sensor.vhd)
+  ![image](https://github.com/janKonicek/parking-git/assets/47054496/8c62ae4e-8558-42c7-ad6e-ae80146ac67c) This simulation shows 10us trigger.
+
+
 
 ## Instructions
 ![IMG_20240412_102940~2](https://github.com/janKonicek/parking-git/assets/93183489/9468692e-0fee-4770-8775-8740f2afcc37)  
