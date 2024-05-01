@@ -2,7 +2,7 @@
 
 ## Team Members
 - **Jan Koníček**
-- **Marek Klvaňa**
+- **Marek Klvaňa** - Responsible for programming [`distance.vhd`](./design/distance.vhd)
 - **Martin Koplík** - Responsible for programming [`led.vhd`](./design/led.vhd) and helped with video recording.
 - **Vojtěch Larva**
 
